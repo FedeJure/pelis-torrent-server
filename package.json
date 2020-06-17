@@ -1,0 +1,39 @@
+{
+  "name": "pelis-torrent-server",
+  "version": "1.0.0",
+  "description": "backend of pelis-torrent",
+  "main": "server.js",
+  "scripts": {
+    "test": "tap test/**/*.test.js",
+    "start": "fastify-app run --port 3001",
+    "dev": "fastify-app run -l info -P -w"
+  },
+  "keywords": [
+    "fastify",
+    "nodejs"
+  ],
+  "author": "Federico Jure <fedejure@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "create-fastify-app": "^2.1.4",
+    "dotenv": "^8.2.0",
+    "fastify": "^2.13.0",
+    "fastify-autoload": "^1.2.2",
+    "fastify-cors": "^3.0.3",
+    "fastify-plugin": "^1.6.1",
+    "fuzzyset.js": "^1.0.5",
+    "is-docker": "^2.0.0",
+    "make-promises-safe": "^5.1.0",
+    "pino-colada": "^1.6.1",
+    "pump": "^3.0.0",
+    "resolve-from": "^5.0.0",
+    "string-similarity": "^4.0.1",
+    "torrent-search-api": "^2.1.1",
+    "yargs-parser": "^18.1.2"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "standard": "^14.3.3",
+    "tap": "^14.10.7"
+  }
+}

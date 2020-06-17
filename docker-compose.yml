@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  pelis-torrent-server:
+    container_name: pelis-torrent-server
+    restart: always
+    build: .
+    image: pelis-torrent-server:1.0.0
+    ports:
+      - '3000:3000'
+    expose:
+      - '3000'
+    
