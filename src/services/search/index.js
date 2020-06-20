@@ -17,5 +17,5 @@ module.exports = async function (fastify, opts) {
       response[index].magnet = magnets[index];
     }
     reply.status(200).send({response});
-  })
+  });
 }

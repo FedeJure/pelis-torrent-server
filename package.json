@@ -17,10 +17,13 @@
   "dependencies": {
     "create-fastify-app": "^2.1.4",
     "dotenv": "^8.2.0",
+    "fast-proxy": "^1.6.2",
     "fastify": "^2.13.0",
     "fastify-autoload": "^1.2.2",
     "fastify-cors": "^3.0.3",
+    "fastify-http-proxy": "^3.2.0",
     "fastify-plugin": "^1.6.1",
+    "fastify-reply-from": "^2.1.0",
     "fuzzyset.js": "^1.0.5",
     "is-docker": "^2.0.0",
     "make-promises-safe": "^5.1.0",
@@ -32,8 +35,6 @@
     "yargs-parser": "^18.1.2"
   },
   "devDependencies": {
-    "pre-commit": "^1.2.2",
-    "standard": "^14.3.3",
-    "tap": "^14.10.7"
+    "standard": "^14.3.3"
   }
 }
