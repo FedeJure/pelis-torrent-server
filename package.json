@@ -15,6 +15,7 @@
   "author": "Federico Jure <fedejure@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "create-fastify-app": "^2.1.4",
     "dotenv": "^8.2.0",
     "fast-proxy": "^1.6.2",
