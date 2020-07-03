@@ -6,4 +6,10 @@ module.exports = async function (fastify, opts) {
     .then(res => reply.status(200).send(res.data))
     .catch(err => reply.status(400).send(err));
   });
+
+  fastify.get('/yts/movie', async function (request, reply) {
+    fastify.axios.get(`https://yts.mx/api/v2/list_movies.json?limit=1&query_term=${request.query.imdbId}`)
+    .then(res => reply.status(200).send(res.data))
+    .catch(err => reply.status(400).send(err));
+  });
 }
