@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "tap test/**/*.test.js",
-    "start": "fastify-app run",
+    "start": "node src/index.js",
     "dev": "fastify-app run -l info -P -w"
   },
   "keywords": [
@@ -16,7 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
-    "create-fastify-app": "^2.1.4",
     "dotenv": "^8.2.0",
     "fast-proxy": "^1.6.2",
     "fastify": "^2.13.0",

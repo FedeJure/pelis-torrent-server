@@ -1,12 +1,13 @@
 'use strict'
 
+const fastify = require('fastify')();
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 const TorrentSearchApi = require('torrent-search-api');
 const proxy = require('fastify-http-proxy');
 const axios = require('axios');
 
-module.exports = function (fastify, opts, next) {
+const initialization = function (fastify, opts, next) {
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
@@ -35,3 +36,10 @@ module.exports = function (fastify, opts, next) {
 
   next()
 }
+
+fastify.register(initialization);
+
+fastify.listen(process.env.PORT || 3000, err => {
+  if (err) throw err
+  console.log(`server listening on ${fastify.server.address().port}`)
+})
