@@ -1,1 +1,1 @@
-web: fastify-app run
+web: node src/index.js
