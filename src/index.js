@@ -39,7 +39,7 @@ const initialization = function (fastify, opts, next) {
 
 fastify.register(initialization);
 
-fastify.listen(process.env.MY_PORT || process.env.PORT || 3000, err => {
+fastify.listen(process.env.MY_PORT || process.env.PORT || 3000, '0.0.0.0', err => {
   if (err) throw err
   console.log(`server listening on ${fastify.server.address().port}`)
-})
+});
