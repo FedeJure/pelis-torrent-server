@@ -5,7 +5,7 @@ const OpenSubtitles = require("opensubtitles-api");
 module.exports = async function (fastify, opts) {
   const openSubtitles = new OpenSubtitles('UserAgent');
   fastify.get('/openSubtitles/search', async function (request, reply) {
-    const subtitles = await openSubtitles.search({imdbid: request.query.imdbid, sublanguageid: "spa,eng,por", extensions: ['vtt']});
+    const subtitles = await openSubtitles.search({imdbid: request.query.imdbid, extensions: ['vtt']});
     reply.status(200).send(subtitles);
   });
 }
