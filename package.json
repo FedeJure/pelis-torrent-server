@@ -27,6 +27,7 @@
     "fuzzyset.js": "^1.0.5",
     "is-docker": "^2.0.0",
     "make-promises-safe": "^5.1.0",
+    "opensubtitles-api": "^5.1.2",
     "pino-colada": "^1.6.1",
     "pump": "^3.0.0",
     "resolve-from": "^5.0.0",
