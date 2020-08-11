@@ -1,4 +1,7 @@
 const fuzzySet = require('fuzzyset.js');
+const TorrentIndexer = require("torrent-indexer");
+const torrentIndexer = new TorrentIndexer();
+
 'use strict'
 /**parameters allowed: name, category... */
 module.exports = async function (fastify, opts) {
@@ -17,5 +20,11 @@ module.exports = async function (fastify, opts) {
       response[index].magnet = magnets[index];
     }
     reply.status(200).send({response});
+  });
+
+  fastify.get('/searchSerie', async function (request, reply) {
+    const query = `${request.query.name} s${request.query.season < 10 ? "0"+request.query.season : request.query.season}e${request.query.episode < 10 ? "0"+request.query.episode : request.query.episode}`;
+    const torrents = await torrentIndexer.search(query, "series");
+    reply.status(200).send({torrents});
   });
 }
