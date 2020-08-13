@@ -31,4 +31,10 @@ module.exports = async function (fastify, opts) {
     .then(res => reply.status(200).send(res.data))
     .catch(err => console.log(err) || reply.status(400).send(err));
   });
+
+  fastify.get('/tmdb/serie', async function (request, reply) {
+    fastify.axios.get(`https://api.themoviedb.org/3/tv/${request.query.serieId}?api_key=133f4d8b4fed128b27fa0bb407956c56`)
+    .then(res => reply.status(200).send(res.data))
+    .catch(err => console.log(err) || reply.status(400).send(err));
+  });
 }
