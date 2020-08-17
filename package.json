@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "fast-proxy": "^1.6.2",
     "fastify": "^2.13.0",
@@ -30,9 +31,10 @@
     "opensubtitles-api": "^5.1.2",
     "pino-colada": "^1.6.1",
     "pump": "^3.0.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
     "resolve-from": "^5.0.0",
     "string-similarity": "^4.0.1",
-    "torrent-indexer": "^1.2.1",
     "torrent-search-api": "^2.1.1",
     "yargs-parser": "^18.1.2"
   },
