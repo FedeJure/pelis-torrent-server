@@ -1,8 +1,7 @@
 const fuzzySet = require('fuzzyset.js');
-const TorrentIndexer = require("torrent-indexer");
-const torrentIndexer = new TorrentIndexer();
-
+const searcher = require('./torrentSearcher.js');
 'use strict'
+
 /**parameters allowed: name, category... */
 module.exports = async function (fastify, opts) {
   fastify.get('/search', async function (request, reply) {
@@ -23,8 +22,27 @@ module.exports = async function (fastify, opts) {
   });
 
   fastify.get('/searchSerie', async function (request, reply) {
-    const query = `${request.query.name} s${request.query.season < 10 ? "0"+request.query.season : request.query.season}e${request.query.episode < 10 ? "0"+request.query.episode : request.query.episode}`;
-    const torrents = await torrentIndexer.search(query, "series");
-    reply.status(200).send({torrents});
+    const season = (request.query.season < 10 ? "0"+ request.query.season : request.query.season).toString();
+    const episode = (request.query.episode < 10 ? "0"+request.query.episode : request.query.episode).toString();
+    const torrents = await searcher.search(request.query.name, season);
+    console.log(torrents)
+    const response = {
+      completeSeason: [],
+      episode: []
+    }
+
+    torrents.forEach(tor => {
+      const title = tor.title.toLocaleLowerCase();
+      const isSeason = title.includes(`season ${request.query.season}`) || title.includes(`s${season}`)
+      const isEpisode = title.includes(`episode ${request.query.episode}`) || title.includes(`e${episode}`) || title.includes(`ep${episode}`)
+
+      if (isSeason && isEpisode) {
+        response.episode.push(tor)
+      }
+      if (isSeason && !isEpisode) {
+        response.completeSeason.push(tor);
+      }
+    });
+    reply.status(200).send({torrents: response});
   });
 }
