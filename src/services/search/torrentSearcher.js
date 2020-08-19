@@ -15,7 +15,6 @@ const searchSerie = async (name, season) => {
 };
 
 const doSearch = async (query, page) => {
-
     return new Promise((onSuccess, onError) => {
         rp(`${baseUrl}/search/${query}/${page}/99/200`)
         .then(function(html){
