@@ -18,6 +18,7 @@ module.exports = async function (fastify, opts) {
     .catch(err => {
         console.log(err);
     });
+
   fastify.get('/openSubtitles/search', async function (request, reply) {
     // const subtitles = await openSubtitles.search({imdbid: request.query.imdbid, sublanguageid: 'en,es'});
     const subtitles = await openSubtitles.api.SearchSubtitles(session.token,[
