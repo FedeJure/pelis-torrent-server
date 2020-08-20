@@ -26,7 +26,7 @@ module.exports = async function (fastify, opts) {
   fastify.get('/searchSerie', async function (request, reply) {
     const season = (request.query.season < 10 ? "0"+ request.query.season : request.query.season).toString();
     const episode = (request.query.episode < 10 ? "0"+request.query.episode : request.query.episode).toString();
-    const names = await getSerieAlternativeNames(request.query.serieId);
+    const names = [request.query.name, ...(await getSerieAlternativeNames(request.query.serieId))];
     const rawTorrents = await Promise.all(names.map(name => searcher.search(escape(name), season)))
     const torrents = [].concat.apply([], rawTorrents)
     const response = {

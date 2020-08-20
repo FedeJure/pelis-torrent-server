@@ -1,4 +1,5 @@
-const {initService} = require('./service');
+const {initService, getSerieAlternativeNames } = require('./service');
+
 'use strict'
 /**parameters allowed: name, category... */
 
@@ -43,6 +44,10 @@ module.exports = async function (fastify, opts) {
     fastify.axios.get(`https://api.themoviedb.org/3/tv/${request.query.serieId}?api_key=${apiKey}`)
     .then(res => reply.status(200).send(res.data))
     .catch(err => console.log(err) || reply.status(400).send(err));
+  });
+
+  fastify.get('/tmdb/serie/alternativeNames', async function (request, reply) {
+    reply.status(200).send(await getSerieAlternativeNames(request.query.serieId))
   });
 }
 
