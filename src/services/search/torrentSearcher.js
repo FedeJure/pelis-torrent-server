@@ -20,8 +20,8 @@ const doSearch = async (query, page) => {
         .then(function(html){
             const rawDataTitles = $('td > div > a', html);
             const titles = [];
-            for (let i = 0; i < rawDataTitles.length; i++) {
-                titles.push(rawDataTitles[i].attribs.title)
+            for (let i = 0; i < rawDataTitles.length; i++) {                
+                titles.push(rawDataTitles[i].children[0].data)
             }
     
             const rawDataMagnet = $('td > a', html);
