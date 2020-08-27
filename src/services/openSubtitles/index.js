@@ -34,6 +34,17 @@ module.exports = async function (fastify, opts) {
       });
     reply.status(200).send(response);
   });
+
+  fastify.get('/openSubtitles/search/serie', async function (request, reply) {
+     MIRAR ESTO!! ->//TODO: https://developers.themoviedb.org/3/tv/get-tv-external-ids
+    const subtitles = await openSubtitles.search({
+      season: request.query.season,
+      episode: request.query.episode,
+      imdbid: request.query.imdbid,
+      extensions: ['srt', 'vtt']
+    })
+    reply.status(200).send(subtitles);
+  });
 }
 
 const toSubtitleObject = sub => {
