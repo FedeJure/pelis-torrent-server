@@ -15,5 +15,10 @@ const getSerieAlternativeNames = async serieId => {
         return [];
     }
 }
+
+const getExternalIdsOfSerie = async serieId => {
+    return fastify.axios.get(`https://api.themoviedb.org/3/tv/${serieId}/external_ids?&api_key=${key}`)
+};
 exports.initService = init;
 exports.getSerieAlternativeNames = getSerieAlternativeNames;
+exports.getExternalIdsOfSerie = getExternalIdsOfSerie;
