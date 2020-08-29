@@ -46,7 +46,8 @@ module.exports = async function (fastify, opts) {
       season: request.query.season,
       episode: request.query.episode,
       imdbid: externalIds.data.imdb_id,
-      extensions: ['srt', 'vtt']
+      extensions: ['srt', 'vtt'],
+      limit: '5'
     })
     reply.status(200).send(subtitles);
   });
@@ -54,7 +55,8 @@ module.exports = async function (fastify, opts) {
   fastify.get('/openSubtitles/search/movie', async function (request, reply) {
     const subtitles = await openSubtitles.search({
       imdbid: request.query.imdbId,
-      extensions: ['srt', 'vtt']
+      extensions: ['srt', 'vtt'],
+      limit: '5'
     })
     reply.status(200).send(subtitles);
   });
