@@ -1,4 +1,5 @@
 const OpenSubtitles = require("opensubtitles-api");
+const { getExternalIdsOfSerie } = require('../tmdb/service');
 const availableLanguages = ['en','es'];
 'use strict'
 /**parameters allowed: name, category... */
@@ -36,11 +37,23 @@ module.exports = async function (fastify, opts) {
   });
 
   fastify.get('/openSubtitles/search/serie', async function (request, reply) {
-     MIRAR ESTO!! ->//TODO: https://developers.themoviedb.org/3/tv/get-tv-external-ids
+    const externalIds = await getExternalIdsOfSerie(request.query.serieId);
+    if (!externalIds || !externalIds.data || !externalIds.data.imdb_id) {
+      reply.status(400).send("Error finding subtitles")
+      return;
+    }
     const subtitles = await openSubtitles.search({
       season: request.query.season,
       episode: request.query.episode,
-      imdbid: request.query.imdbid,
+      imdbid: externalIds.data.imdb_id,
+      extensions: ['srt', 'vtt']
+    })
+    reply.status(200).send(subtitles);
+  });
+
+  fastify.get('/openSubtitles/search/movie', async function (request, reply) {
+    const subtitles = await openSubtitles.search({
+      imdbid: request.query.imdbId,
       extensions: ['srt', 'vtt']
     })
     reply.status(200).send(subtitles);
