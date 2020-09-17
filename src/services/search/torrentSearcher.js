@@ -14,6 +14,10 @@ const searchSerie = async (name, season) => {
         await Promise.all(getSearchQuerys(name, season).map(s => doSearch(s, 1))));
 };
 
+const searchMovie = async name => {
+    return doSearch(name, 1);
+}
+
 const doSearch = async (query, page) => {
     return new Promise((onSuccess, onError) => {
         rp(`${baseUrl}/search/${query}/${page}/99/200`)
@@ -46,4 +50,5 @@ const doSearch = async (query, page) => {
     })
 }
 
-exports.search = searchSerie;
+exports.searchSerie = searchSerie;
+exports.searchMovie = searchMovie;
