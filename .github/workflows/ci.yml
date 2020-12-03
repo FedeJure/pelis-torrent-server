@@ -12,6 +12,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SERVER_IP }}
+          port: 22222
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           script: cd ${{ secrets.PROJECT_PATH }} && git pull origin master && tmux send-keys -t setafun_backend C-c 'npm start' ENTER
