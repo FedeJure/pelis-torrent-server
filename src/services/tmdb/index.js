@@ -51,8 +51,10 @@ module.exports = async function (fastify, opts) {
   });
 
   fastify.get('/tmdb/homeMovies', async function (request, reply) {
-    var genre = (await getMovieGenres()).find(g => g.name == request.query.genre);
-    fastify.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${request.query.page}${genre ? `&with_genre=${genre.id}` : ""}`)
+    
+    var genre = request.query.genre ? (await getMovieGenres()).find(g => g.name == request.query.genre) : null;
+    
+    fastify.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${request.query.page}${genre ? `&with_genres=${genre.id}` : ""}`)
     .then(res => reply.status(200).send(res.data))
     .catch(err => console.log(err) || reply.status(400).send(err));
   });
@@ -60,6 +62,12 @@ module.exports = async function (fastify, opts) {
   fastify.get('/tmdb/movie/getExternalIds', async function (request, reply) {
     fastify.axios.get(`https://api.themoviedb.org/3/movie/${request.query.movieId}/external_ids?api_key=${apiKey}`)
     .then(res => reply.status(200).send(res.data))
+    .catch(err => console.log(err) || reply.status(400).send(err));
+  });
+
+  fastify.get('/tmdb/movie/genres', async function (request, reply) {
+    getMovieGenres()
+    .then(res => reply.status(200).send(res))
     .catch(err => console.log(err) || reply.status(400).send(err));
   });
 }

@@ -39,7 +39,8 @@ const getMovieGenres = async () => {
             res(movieGenres);
             return;
         }
-        movieGenres = await fastify.axios.get(`https://api.themoviedb.org/3/genre/movie/list?&api_key=${key}`);
+        movieGenres = (await fastify.axios.get(`https://api.themoviedb.org/3/genre/movie/list?&api_key=${key}`)).data.genres || [];
+        console.log(movieGenres)
         res(movieGenres);
     });
 }
