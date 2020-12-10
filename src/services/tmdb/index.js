@@ -1,4 +1,4 @@
-const {initService, getSerieAlternativeNames } = require('./service');
+const {initService, getSerieAlternativeNames, getMovieGenres, getSerieGenres } = require('./service');
 
 'use strict'
 /**parameters allowed: name, category... */
@@ -51,7 +51,8 @@ module.exports = async function (fastify, opts) {
   });
 
   fastify.get('/tmdb/homeMovies', async function (request, reply) {
-    fastify.axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${request.query.page}`)
+    var genre = (await getMovieGenres()).find(g => g.name == request.query.genre);
+    fastify.axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${request.query.page}${genre ? `&with_genre=${genre.id}` : ""}`)
     .then(res => reply.status(200).send(res.data))
     .catch(err => console.log(err) || reply.status(400).send(err));
   });
