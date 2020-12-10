@@ -4,7 +4,6 @@ const fastify = require('fastify')();
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
 const TorrentSearchApi = require('torrent-search-api');
-const proxy = require('fastify-http-proxy');
 const axios = require('axios');
 
 const initialization = function (fastify, opts, next) {
