@@ -35,7 +35,10 @@ module.exports = async function (fastify, opts) {
   });
 
   fastify.get('/tmdb/homeSeries', async function (request, reply) {
-    fastify.axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&page=${request.query.page}`)
+
+    var genre = request.query.genre ? (await getSerieGenres()).find(g => g.name == request.query.genre) : null;
+
+    fastify.axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&page=${request.query.page}${genre ? `&with_genres=${genre.id}` : ""}`)
     .then(res => reply.status(200).send(res.data))
     .catch(err => console.log(err) || reply.status(400).send(err));
   });

@@ -40,7 +40,6 @@ const getMovieGenres = async () => {
             return;
         }
         movieGenres = (await fastify.axios.get(`https://api.themoviedb.org/3/genre/movie/list?&api_key=${key}`)).data.genres || [];
-        console.log(movieGenres)
         res(movieGenres);
     });
 }
@@ -51,7 +50,7 @@ const getSerieGenres = async () => {
             res(serieGenres);
             return;
         }
-        serieGenres = await fastify.axios.get(`https://api.themoviedb.org/3/genre/tv/list?&api_key=${key}`);
+        serieGenres = (await fastify.axios.get(`https://api.themoviedb.org/3/genre/tv/list?&api_key=${key}`)).data.genres || [];
         res(serieGenres);
     });
 }
