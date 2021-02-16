@@ -3,15 +3,18 @@
 const fastify = require('fastify')();
 const path = require('path')
 const AutoLoad = require('fastify-autoload')
-const TorrentSearchApi = require('torrent-search-api');
+// const TorrentSearchApi = require('torrent-search-api');
 const axios = require('axios');
+const { getClient } = require("./repositories/mongoClient");
 
 const initialization = function (fastify, opts, next) {
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
-  fastify.torrent = TorrentSearchApi;
-  fastify.torrent.enablePublicProviders();
+  // fastify.torrent = TorrentSearchApi;
+  // fastify.torrent.enablePublicProviders();
+
+  const mongoClient = 
 
   fastify.axios = axios;
 

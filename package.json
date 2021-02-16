@@ -15,6 +15,7 @@
   "author": "Federico Jure <fedejure@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "assert": "^2.0.0",
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
@@ -28,6 +29,7 @@
     "fuzzyset.js": "^1.0.5",
     "is-docker": "^2.0.0",
     "make-promises-safe": "^5.1.0",
+    "mongodb": "^3.6.4",
     "opensubtitles-api": "^5.1.2",
     "pino-colada": "^1.6.1",
     "pump": "^3.0.0",
@@ -39,6 +41,7 @@
     "yargs-parser": "^18.1.2"
   },
   "devDependencies": {
-    "standard": "^14.3.3"
+    "standard": "^14.3.3",
+    "mongo-mock": "^4.0.0"
   }
 }
