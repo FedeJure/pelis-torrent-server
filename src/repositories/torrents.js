@@ -5,7 +5,7 @@ const serieCollectionName = "serie";
 
 function saveTorrent(torrent, collection) {
     return new Promise((res, err) => {
-        collection.insertOne({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash},
+        collection.insertOne(torrent,
         (error, result) => {
             if (error != null) err(error);
             res(result);
@@ -34,11 +34,11 @@ class TorrentRepository {
     }
 
     saveSerie(torrent) {
-        return saveTorrent(torrent, this.serieCollection);   
+        return saveTorrent({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash, "season": torrent.season}, this.serieCollection);   
     }
 
     saveMovie(torrent) {
-        return saveTorrent(torrent, this.movieCollection);   
+        return saveTorrent({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash}, this.movieCollection);   
     }
 
     getSerie(id) {
@@ -50,7 +50,7 @@ class TorrentRepository {
     }
 }
 
-class Torrent {
+class MovieTorrent {
     constructor(id, name, hash) {
         this.id = id;
         this.name = name;
@@ -58,5 +58,15 @@ class Torrent {
     }
 }
 
+class SerieTorrent {
+    constructor(id, name, hash, season) {
+        this.id = id;
+        this.name = name;
+        this.hash = hash;
+        this.season = season; 
+    }
+}
+
 exports.TorrentRepository = TorrentRepository;
-exports.Torrent = Torrent;
+exports.MovieTorrent = MovieTorrent;
+exports.SerieTorrent = SerieTorrent;
