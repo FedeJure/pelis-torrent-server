@@ -34,11 +34,11 @@ class TorrentRepository {
     }
 
     saveSerie(torrent) {
-        return saveTorrent({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash, "season": torrent.season}, this.serieCollection);   
+        return saveTorrent({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash, "season": torrent.season, "subtitleType": torrent.subtitleType, "audioType": torrent.audioType}, this.serieCollection);   
     }
 
     saveMovie(torrent) {
-        return saveTorrent({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash}, this.movieCollection);   
+        return saveTorrent({"id": `${torrent.id}`, "name":torrent.name, "hash":torrent.hash, "subtitleType": torrent.subtitleType, "audioType": torrent.audioType}, this.movieCollection);   
     }
 
     getSerie(id) {
@@ -51,19 +51,23 @@ class TorrentRepository {
 }
 
 class MovieTorrent {
-    constructor(id, name, hash) {
+    constructor(id, name, hash, audioType, subtitleType) {
         this.id = id;
         this.name = name;
         this.hash = hash;
+        this.audioType = audioType;
+        this.subtitleType = subtitleType;
     }
 }
 
 class SerieTorrent {
-    constructor(id, name, hash, season) {
+    constructor(id, name, hash, season, audioType, subtitleType) {
         this.id = id;
         this.name = name;
         this.hash = hash;
         this.season = season; 
+        this.audioType = audioType;
+        this.subtitleType = subtitleType;
     }
 }
 

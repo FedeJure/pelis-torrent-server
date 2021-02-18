@@ -26,8 +26,9 @@ module.exports = async function (fastify, opts) {
     });
 
     fastify.post('/verifiedTorrents/movie', async function (request, reply) {
-        const {id, name, hash} = request.body;
-        const torrent = new MovieTorrent(id,name,hash);
+        console.log(request.body)
+        const {id, name, hash, audioType, subtitlesType} = request.body;
+        const torrent = new MovieTorrent(id,name,hash, audioType, subtitlesType);
         torrentsRepository.saveMovie(torrent).then(result => {
             reply.status(200).send(result);
         },
@@ -37,8 +38,8 @@ module.exports = async function (fastify, opts) {
     });
 
     fastify.post('/verifiedTorrents/serie', async function (request, reply) {
-        const {id, name, season, hash} = request.body;
-        const torrent = new SerieTorrent(id,name,hash,season);
+        const {id, name, season, hash, audioType, subtitlesType} = request.body;
+        const torrent = new SerieTorrent(id,name,hash,season, audioType, subtitlesType);
         torrentsRepository.saveMovie(torrent).then(result => {
             reply.status(200).send(result);
         },
