@@ -1,6 +1,6 @@
-const fuzzySet = require('fuzzyset.js');
 const searcher = require('./torrentSearcher.js');
 const { getSerieAlternativeNames, getMovieAlternativeNames } = require("../tmdb/service");
+const { getMovieTorrentsWithId } = require("../verifiedTorrents/service");
 
 'use strict'
 
@@ -9,9 +9,9 @@ module.exports = async function (fastify, opts) {
   fastify.get('/searchMovie', async function (request, reply) {
     const names = [request.query.name, ...(await getMovieAlternativeNames(request.query.movieId))];
     const rawTorrents = await Promise.all(names.map(name => searcher.searchMovie(escape(name))))
-    const torrents = [].concat.apply([], rawTorrents)
-    
-    reply.status(200).send({torrents});
+    const verifiedTorrents = await getMovieTorrentsWithId(request.query.movieId);
+    const torrents = rawTorrents[0]
+    reply.status(200).send({torrents, verifiedTorrents});
   });
 
   fastify.get('/searchSerie', async function (request, reply) {

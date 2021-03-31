@@ -1,6 +1,6 @@
-const { TorrentRepository, MovieTorrent, SerieTorrent } = require("../../repositories/torrents");
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+const { TorrentRepository, MovieTorrent, SerieTorrent } = require("../../repositories/torrents");
 
 dotenv.config();
 
