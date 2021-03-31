@@ -28,6 +28,7 @@
     "fastify-reply-from": "^2.1.0",
     "fuzzyset.js": "^1.0.5",
     "is-docker": "^2.0.0",
+    "jsonwebtoken": "^8.5.1",
     "make-promises-safe": "^5.1.0",
     "mongodb": "^3.6.4",
     "opensubtitles-api": "^5.1.2",
