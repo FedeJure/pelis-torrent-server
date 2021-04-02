@@ -21,8 +21,8 @@ const getSerieAlternativeNames = async serieId => {
 
 const getMovieAlternativeNames = async movieId => {
     try {
-        return (await fastify.axios.get(`https://api.themoviedb.org/3/movie/${movieId}/alternative_titles?&api_key=${key}`))
-            .data.results.map(r => escape(r.title));
+        var results = await fastify.axios.get(`https://api.themoviedb.org/3/movie/${movieId}/alternative_titles?&api_key=${key}`);
+        return results.data && results.data.results ? results.data.results.map(r => escape(r.title)) : [];
     } catch (error) {
         console.error(error)
         return [];
