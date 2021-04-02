@@ -1,16 +1,13 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { TorrentRepository, MovieTorrent, SerieTorrent } = require("../../repositories/torrents");
+const service = require('./service')
 
 dotenv.config();
 
 module.exports = async function (fastify, opts) {
-
-    const torrentsRepository = new TorrentRepository();
-
     fastify.get('/verifiedTorrents/movie', async function (request, reply) {
         const {movieId} = request.query;
-        torrentsRepository.getMovie(movieId).then(results => {
+        service.getMovieTorrentsWithId(movieId).then(results => {
             reply.status(200).send(results);
         },
         err => {
@@ -20,7 +17,7 @@ module.exports = async function (fastify, opts) {
 
     fastify.get('/verifiedTorrents/serie', async function (request, reply) {
         const {serieId} = request.query;
-        torrentsRepository.getSerie(serieId).then(results => {
+        service.getSerieTorrentsWithId(serieId).then(results => {
             reply.status(200).send(results);
         },
         err => {
@@ -36,9 +33,7 @@ module.exports = async function (fastify, opts) {
             reply.status(501).send({ok: false, error: "Unauthorized"});
             return;
         }
-        const {id, name, hash, audioType, subtitlesType} = request.body;
-        const torrent = new MovieTorrent(id,name,hash, audioType, subtitlesType);
-        torrentsRepository.saveMovie(torrent).then(result => {
+        service.saveMovie(request.body).then(result => {
             reply.status(200).send(result);
         },
         err => {
@@ -53,9 +48,7 @@ module.exports = async function (fastify, opts) {
             reply.status(501).send({ok: false, error: "Unauthorized"});
             return;
         }
-        const {id, name, season, hash, audioType, subtitlesType} = request.body;
-        const torrent = new SerieTorrent(id,name,hash,season, audioType, subtitlesType);
-        torrentsRepository.saveMovie(torrent).then(result => {
+        service.saveSerie(request.body).then(result => {
             reply.status(200).send(result);
         },
         err => {
